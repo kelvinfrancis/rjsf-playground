@@ -28,6 +28,7 @@ const initialState: PlaygroundState = {
   schemaObject: JSON.parse(DEFAULT_SCHEMA),
   uiSchemaText: DEFAULT_UI_SCHEMA,
   uiSchemaObject: {},
+  formData: {},
   error: null,
 }
 
@@ -51,6 +52,9 @@ function playgroundReducer(
       } catch {
         return { ...state, uiSchemaText: action.payload, error: 'JSON inválido: revisa la sintaxis del UI Schema.' }
       }
+    }
+    case 'FORM_DATA_CHANGED': {
+      return { ...state, formData: action.payload }
     }
     default:
       return state
