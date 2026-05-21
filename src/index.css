@@ -109,3 +109,25 @@ button {
 .rjsf .required {
   color: var(--color-error);
 }
+
+.rjsf input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.rjsf input[type='radio'] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.rjsf .checkbox label,
+.rjsf .radio label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
