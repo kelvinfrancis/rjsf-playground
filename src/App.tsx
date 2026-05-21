@@ -1,6 +1,7 @@
 import { SchemaEditor } from './components/SchemaEditor'
 import { FormPreview } from './components/FormPreview'
 import { ExportModal } from './components/ExportModal'
+import { ExampleSelector } from './components/ExampleSelector'
 import styles from './App.module.css'
 
 function App() {
@@ -11,7 +12,10 @@ function App() {
           <span className={styles.logo}>RJSF</span>
           <span className={styles.logoSub}>Playground</span>
         </div>
-        <ExportModal />
+        <div className={styles.headerRight}>
+          <ExampleSelector />
+          <ExportModal />
+        </div>
       </header>
       <main className={styles.main}>
         <section className={styles.panel}>

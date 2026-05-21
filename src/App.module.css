@@ -47,3 +47,9 @@
 .panel:last-child {
   border-right: none;
 }
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
