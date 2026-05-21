@@ -1,6 +1,7 @@
 import Editor from '@monaco-editor/react'
 import { useState } from 'react'
 import { usePlayground } from '../context/usePlayground'
+import styles from './ExportModal.module.css'
 
 export function ExportModal() {
   const { state } = usePlayground()
@@ -8,14 +9,7 @@ export function ExportModal() {
   const [copied, setCopied] = useState(false)
 
   const json = state.schemaObject
-    ? JSON.stringify(
-        {
-          schema: state.schemaObject,
-          uiSchema: state.uiSchemaObject,
-        },
-        null,
-        2
-      )
+    ? JSON.stringify({ schema: state.schemaObject, uiSchema: state.uiSchemaObject }, null, 2)
     : ''
 
   async function handleCopy() {
@@ -26,34 +20,25 @@ export function ExportModal() {
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Exportar JSON</button>
+      <button className={styles.triggerBtn} onClick={() => setOpen(true)}>
+        Exportar JSON
+      </button>
 
       {open && (
-        <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          zIndex: 1000,
-        }}>
-          <div style={{
-            background: 'white', borderRadius: '8px',
-            padding: '1.5rem', width: '60vw', maxHeight: '80vh',
-            display: 'flex', flexDirection: 'column', gap: '1rem',
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3>JSON Schema exportado</h3>
-              <button onClick={() => setOpen(false)}>✕ Cerrar</button>
+        <div className={styles.overlay}>
+          <div className={styles.modal}>
+            <div className={styles.modalHeader}>
+              <h3>JSON exportado</h3>
+              <button className={styles.closeBtn} onClick={() => setOpen(false)}>✕</button>
             </div>
             <Editor
               height="50vh"
               defaultLanguage="json"
               value={json}
-              options={{
-                readOnly: true,
-                minimap: { enabled: false },
-                fontSize: 13,
-              }}
+              theme="vs-dark"
+              options={{ readOnly: true, minimap: { enabled: false }, fontSize: 13 }}
             />
-            <button onClick={handleCopy}>
+            <button className={styles.copyBtn} onClick={handleCopy}>
               {copied ? '✓ Copiado' : 'Copiar al portapapeles'}
             </button>
           </div>

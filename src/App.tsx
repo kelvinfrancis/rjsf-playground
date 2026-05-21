@@ -1,18 +1,26 @@
 import { SchemaEditor } from './components/SchemaEditor'
 import { FormPreview } from './components/FormPreview'
 import { ExportModal } from './components/ExportModal'
+import styles from './App.module.css'
 
 function App() {
   return (
-    <div style={{ padding: '1rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>RJSF Playground</h1>
+    <div className={styles.app}>
+      <header className={styles.header}>
+        <div className={styles.headerLeft}>
+          <span className={styles.logo}>RJSF</span>
+          <span className={styles.logoSub}>Playground</span>
+        </div>
         <ExportModal />
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-        <SchemaEditor />
-        <FormPreview />
-      </div>
+      </header>
+      <main className={styles.main}>
+        <section className={styles.panel}>
+          <SchemaEditor />
+        </section>
+        <section className={styles.panel}>
+          <FormPreview />
+        </section>
+      </main>
     </div>
   )
 }

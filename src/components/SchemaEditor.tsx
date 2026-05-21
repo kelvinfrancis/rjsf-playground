@@ -1,5 +1,6 @@
 import Editor from '@monaco-editor/react'
 import { usePlayground } from '../context/usePlayground'
+import styles from './SchemaEditor.module.css'
 
 export function SchemaEditor() {
   const { state, dispatch } = usePlayground()
@@ -13,38 +14,30 @@ export function SchemaEditor() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <div>
-        <h3>JSON Schema</h3>
+    <div className={styles.container}>
+      <div className={styles.editorBlock}>
+        <span className={styles.label}>JSON Schema</span>
         <Editor
-          height="40vh"
+          height="60vh"
           defaultLanguage="json"
           value={state.schemaText}
           onChange={handleSchemaChange}
-          options={{
-            minimap: { enabled: false },
-            fontSize: 13,
-            tabSize: 2,
-          }}
+          theme="vs-dark"
+          options={{ minimap: { enabled: false }, fontSize: 13, tabSize: 2 }}
         />
       </div>
-      <div>
-        <h3>UI Schema</h3>
+      <div className={styles.editorBlock}>
+        <span className={styles.label}>UI Schema</span>
         <Editor
-          height="20vh"
+          height="25vh"
           defaultLanguage="json"
           value={state.uiSchemaText}
           onChange={handleUiSchemaChange}
-          options={{
-            minimap: { enabled: false },
-            fontSize: 13,
-            tabSize: 2,
-          }}
+          theme="vs-dark"
+          options={{ minimap: { enabled: false }, fontSize: 13, tabSize: 2 }}
         />
       </div>
-      {state.error && (
-        <p style={{ color: 'red', fontSize: '0.85rem' }}>{state.error}</p>
-      )}
+      {state.error && <p className={styles.error}>{state.error}</p>}
     </div>
   )
 }
